@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  database:
+    image: redis
+    networks:
+      - back
+  entrance:
+    build: ./entrance
+    networks:
+      - back
+    ports: 
+      - "80:80"
+    command: node app.js
+
+
+
+
+networks: 
+  back:
+
+
