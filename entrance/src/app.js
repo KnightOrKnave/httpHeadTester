@@ -11,14 +11,17 @@ const redis = new Redis(databasePort, databaseHost);
 var server = http.createServer();
 server.on("request", function(request, response) {
   (async () => {
+    let res="NONE"
     try {
       const key = moment(Date.now()).format("YYYY-MM-DD-hh-mm-ss-") + uuid();
       const value = JSON.stringify(request.headers);
+      res = await redis.ping();
       await redis.set(key, value);
     } catch (err) {
       console.log(err);
+      console.log("dbhost:"+databaseHost+" dbport:"+databasePort);
     } finally {
-      response.end(uuid());
+      response.end(uuid()+"-"+res);
     }
   })();
 });

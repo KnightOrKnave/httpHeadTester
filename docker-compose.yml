@@ -3,6 +3,8 @@ version: '2'
 services:
   database:
     image: redis
+    ports: 
+      - "6379"
     networks:
       - back
   entrance:
@@ -12,9 +14,19 @@ services:
     ports: 
       - "80:80"
     command: node app.js
-
-
-
+    environment:
+      - DB_HOST=database
+      - DB_PORT=6379
+  staffdoor:
+    build: ./sidedoor
+    networks:
+      - back
+    ports: 
+      - "11180:80"
+    command: node app.js
+    environment:
+      - DB_HOST=database
+      - DB_PORT=6379
 
 networks: 
   back:
