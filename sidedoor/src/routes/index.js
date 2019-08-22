@@ -3,7 +3,7 @@ var router = express.Router();
 var Redis = require("ioredis");
 
 const databaseHost = process.env.DB_HOST || "localhost";
-const databasePort = process.env.DB_PORT || 32770;
+const databasePort = process.env.DB_PORT || 6379;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
       const redis = new Redis(databasePort, databaseHost);
       keys = await redis.keys("*");
       kvarray = [];
-      for (var x of keys) {
+      for (var x of keys.sort) {
         var t = await redis.get(x);
       }
       redis.disconnect();
