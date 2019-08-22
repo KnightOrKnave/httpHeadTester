@@ -9,6 +9,21 @@
             "request": "launch",
             "name": "Launch Program",
             "program": "${file}"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch via NPM",
+            "runtimeExecutable": "npm",
+            "cwd": "${workspaceFolder}",
+            "runtimeArgs": [
+                "run",
+                "start"
+            ],
+            "port": 3000,
+            "env": {
+                "DB_PORT":"32775"
+            }
         }
     ]
 }

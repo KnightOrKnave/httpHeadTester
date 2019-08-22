@@ -13,9 +13,11 @@
         <th>RequestHeader</th>
       </thead>
       <tbody>
-        <% for(var item in arr){ %>
-          <td><%= x.time %></td>
-          <td><%= x.header %></td>
+        <% for(var item of arr){ %>
+        <tr>
+          <td><%= item.time %></td>
+          <td><%= item.header %></td>
+        </tr>
         <% } %>
         </tbody>
     </table>
