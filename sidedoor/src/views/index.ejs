@@ -7,5 +7,19 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <table>
+      <thead>
+        <th>Time</th>
+        <th>RequestHeader</th>
+      </thead>
+      <tbody>
+        <% for(var item in arr){ %>
+          <td><%= x.time %></td>
+          <td><%= x.header %></td>
+        <% } %>
+        </tbody>
+    </table>
+        
+    </ol>
   </body>
 </html>
