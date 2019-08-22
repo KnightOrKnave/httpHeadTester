@@ -12,9 +12,12 @@ router.get("/", function(req, res, next) {
     try {
       const redis = new Redis(databasePort, databaseHost);
       keys = await redis.keys("*");
-      for (var x of keys) {
-        var t = await redis.get(x);
-        kvarray.push({ time: x, header: t });
+      let skeys=await keys.sort();
+      for (var x of skeys) {
+        let tm=x.split('-');
+        let time=`${tm[0]}-${tm[1]}-${tm[2]}T${tm[3]}:${tm[4]}:${tm[5]}`;
+        let t = await redis.get(x);
+        kvarray.push({ time: time, header: t });
       }
       redis.disconnect();
       res.render("index", { title: "Express", arr: kvarray });
